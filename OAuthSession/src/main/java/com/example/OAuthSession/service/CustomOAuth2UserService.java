@@ -1,5 +1,6 @@
 package com.example.OAuthSession.service;
 
+import com.example.OAuthSession.dto.CustomOAuth2User;
 import com.example.OAuthSession.dto.GoogleResponse;
 import com.example.OAuthSession.dto.NaverResponse;
 import com.example.OAuthSession.dto.OAuth2Response;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     // DefaultOAuth2UserService는 Oauth2UserService의 구현체이다.
-
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -36,7 +36,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
             return null;
         }
-    // 실습실 서명 받아야한다. 메일로보내주신다 하심  조가현 
-        // 나머지 구현
+
+        String role = "ROLE_USER";
+
+        return new CustomOAuth2User(oAuth2Response, role);
     }
 }
